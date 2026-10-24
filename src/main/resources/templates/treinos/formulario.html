@@ -2,42 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${treino.id} == null ? 'Novo Treino' : 'Editar Treino'"></title>
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <h1 th:text="${treino.id} == null ? 'Novo Treino' : 'Editar Treino'"></h1>
-    <form th:action="@{/treinos/salvar}" th:object="${treino}" method="post">
-        <input type="hidden" th:field="*{id}" />
+    <header class="topo">
+        <a href="/" class="logo">LegalFit<span>Recepção</span></a>
+        <nav>
+            <a href="/alunos">Alunos</a>
+            <a href="/professores">Professores</a>
+            <a href="/treinos" class="ativo">Treinos</a>
+            <a href="/exercicios">Exercícios</a>
+        </nav>
+    </header>
 
-        <label for="nome">Nome:</label>
-        <input type="text" th:field="*{nome}" id="nome" placeholder="Ex.: Treino A - Peito e Tríceps" />
-        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
-        <br>
+    <main>
+        <div class="cartao formulario">
+            <h1 th:text="${treino.id} == null ? 'Novo Treino' : 'Editar Treino'"></h1>
+            <p class="subtitulo">Escolha o aluno e o professor responsável pelo treino</p>
 
-        <label for="objetivo">Objetivo:</label>
-        <input type="text" th:field="*{objetivo}" id="objetivo" placeholder="Ex.: Hipertrofia" />
-        <span th:if="${#fields.hasErrors('objetivo')}" th:errors="*{objetivo}" class="error"></span>
-        <br>
+            <form th:action="@{/treinos/salvar}" th:object="${treino}" method="post">
+                <input type="hidden" th:field="*{id}" />
 
-        <label for="aluno">Aluno:</label>
-        <select th:field="*{aluno}" id="aluno">
-            <option value="">Selecione um aluno</option>
-            <option th:each="a : ${alunos}" th:value="${a.id}" th:text="${a.nome}"></option>
-        </select>
-        <span th:if="${#fields.hasErrors('aluno')}" th:errors="*{aluno}" class="error"></span>
-        <br>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="nome">Nome do treino</label>
+                        <input type="text" th:field="*{nome}" id="nome" placeholder="Ex.: Treino A - Peito e Tríceps" />
+                        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+                    </div>
+                    <div class="campo">
+                        <label for="objetivo">Objetivo</label>
+                        <input type="text" th:field="*{objetivo}" id="objetivo" placeholder="Ex.: Hipertrofia" />
+                        <span th:if="${#fields.hasErrors('objetivo')}" th:errors="*{objetivo}" class="error"></span>
+                    </div>
+                </div>
 
-        <label for="professor">Professor:</label>
-        <select th:field="*{professor}" id="professor">
-            <option value="">Selecione um professor</option>
-            <option th:each="p : ${professores}" th:value="${p.id}" th:text="${p.nome}"></option>
-        </select>
-        <span th:if="${#fields.hasErrors('professor')}" th:errors="*{professor}" class="error"></span>
-        <br><br>
+                <div class="campo">
+                    <label for="aluno">Aluno</label>
+                    <select th:field="*{aluno}" id="aluno">
+                        <option value="">Selecione um aluno</option>
+                        <option th:each="a : ${alunos}" th:value="${a.id}" th:text="${a.nome}"></option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('aluno')}" th:errors="*{aluno}" class="error"></span>
+                    <p class="dica">O aluno não está na lista? <a href="/alunos/novo">Cadastre o aluno primeiro</a>.</p>
+                </div>
 
-        <input type="submit" value="Salvar" />
-        <a href="/treinos">Cancelar</a>
-    </form>
+                <div class="campo">
+                    <label for="professor">Professor responsável</label>
+                    <select th:field="*{professor}" id="professor">
+                        <option value="">Selecione um professor</option>
+                        <option th:each="p : ${professores}" th:value="${p.id}"
+                                th:text="${p.nome + ' - ' + p.especialidade}"></option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('professor')}" th:errors="*{professor}" class="error"></span>
+                    <p class="dica">O professor não está na lista? <a href="/professores/novo">Cadastre o professor primeiro</a>.</p>
+                </div>
+
+                <div class="acoes">
+                    <input type="submit" value="Salvar" class="botao" />
+                    <a href="/treinos" class="botao botao-secundario">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

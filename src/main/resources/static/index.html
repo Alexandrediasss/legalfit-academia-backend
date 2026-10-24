@@ -2,18 +2,60 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>LegalFit Academia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LegalFit Academia - Recepção</title>
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <h1>LegalFit Academia</h1>
-    <p>Escolha o que deseja gerenciar:</p>
-    <ul>
-        <li><a href="/alunos">Alunos</a></li>
-        <li><a href="/professores">Professores</a></li>
-        <li><a href="/treinos">Treinos</a></li>
-        <li><a href="/exercicios">Exercícios</a></li>
-    </ul>
-    <p><a href="/h2-console">Console do banco H2</a></p>
+    <header class="topo">
+        <a href="/" class="logo">LegalFit<span>Recepção</span></a>
+        <nav>
+            <a href="/alunos">Alunos</a>
+            <a href="/professores">Professores</a>
+            <a href="/treinos">Treinos</a>
+            <a href="/exercicios">Exercícios</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Bem-vindo à recepção</h1>
+        <p class="subtitulo">O que você precisa cadastrar hoje?</p>
+
+        <div class="painel">
+            <div class="cartao">
+                <h2>Alunos</h2>
+                <p>Cadastre quem acabou de se matricular na academia.</p>
+                <a href="/alunos/novo" class="botao">+ Novo aluno</a>
+                <a href="/alunos" class="ver-todos">Ver todos os alunos</a>
+            </div>
+            <div class="cartao">
+                <h2>Professores</h2>
+                <p>Cadastre os professores e a especialidade de cada um.</p>
+                <a href="/professores/novo" class="botao">+ Novo professor</a>
+                <a href="/professores" class="ver-todos">Ver todos os professores</a>
+            </div>
+            <div class="cartao">
+                <h2>Treinos</h2>
+                <p>Monte o treino de um aluno com o professor responsável.</p>
+                <a href="/treinos/novo" class="botao">+ Novo treino</a>
+                <a href="/treinos" class="ver-todos">Ver todos os treinos</a>
+            </div>
+            <div class="cartao">
+                <h2>Exercícios</h2>
+                <p>Adicione os exercícios, séries e cargas de cada treino.</p>
+                <a href="/exercicios/novo" class="botao">+ Novo exercício</a>
+                <a href="/exercicios" class="ver-todos">Ver todos os exercícios</a>
+            </div>
+        </div>
+
+        <div class="cartao passos">
+            <h2>Ordem de cadastro</h2>
+            <ol>
+                <li>Cadastre o <strong>professor</strong> e o <strong>aluno</strong>.</li>
+                <li>Crie o <strong>treino</strong>, escolhendo o aluno e o professor.</li>
+                <li>Adicione os <strong>exercícios</strong> dentro do treino.</li>
+            </ol>
+        </div>
+    </main>
 </body>
 </html>

@@ -2,45 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${exercicio.id} == null ? 'Novo Exercício' : 'Editar Exercício'"></title>
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <h1 th:text="${exercicio.id} == null ? 'Novo Exercício' : 'Editar Exercício'"></h1>
-    <form th:action="@{/exercicios/salvar}" th:object="${exercicio}" method="post">
-        <input type="hidden" th:field="*{id}" />
+    <header class="topo">
+        <a href="/" class="logo">LegalFit<span>Recepção</span></a>
+        <nav>
+            <a href="/alunos">Alunos</a>
+            <a href="/professores">Professores</a>
+            <a href="/treinos">Treinos</a>
+            <a href="/exercicios" class="ativo">Exercícios</a>
+        </nav>
+    </header>
 
-        <label for="nome">Nome:</label>
-        <input type="text" th:field="*{nome}" id="nome" placeholder="Ex.: Supino reto" />
-        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
-        <br>
+    <main>
+        <div class="cartao formulario">
+            <h1 th:text="${exercicio.id} == null ? 'Novo Exercício' : 'Editar Exercício'"></h1>
+            <p class="subtitulo">Escolha o treino e preencha séries, repetições e carga</p>
 
-        <label for="series">Séries:</label>
-        <input type="number" th:field="*{series}" id="series" placeholder="Ex.: 4" />
-        <span th:if="${#fields.hasErrors('series')}" th:errors="*{series}" class="error"></span>
-        <br>
+            <form th:action="@{/exercicios/salvar}" th:object="${exercicio}" method="post">
+                <input type="hidden" th:field="*{id}" />
 
-        <label for="repeticoes">Repetições:</label>
-        <input type="number" th:field="*{repeticoes}" id="repeticoes" placeholder="Ex.: 12" />
-        <span th:if="${#fields.hasErrors('repeticoes')}" th:errors="*{repeticoes}" class="error"></span>
-        <br>
+                <div class="campo">
+                    <label for="treino">Treino</label>
+                    <select th:field="*{treino}" id="treino">
+                        <option value="">Selecione um treino</option>
+                        <option th:each="t : ${treinos}" th:value="${t.id}"
+                                th:text="${t.nome + ' (aluno: ' + t.aluno.nome + ')'}"></option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('treino')}" th:errors="*{treino}" class="error"></span>
+                    <p class="dica">O treino não está na lista? <a href="/treinos/novo">Crie o treino primeiro</a>.</p>
+                </div>
 
-        <label for="carga">Carga (kg):</label>
-        <input type="number" step="0.5" th:field="*{carga}" id="carga" placeholder="Ex.: 20" />
-        <span th:if="${#fields.hasErrors('carga')}" th:errors="*{carga}" class="error"></span>
-        <br>
+                <div class="campo">
+                    <label for="nome">Exercício</label>
+                    <input type="text" th:field="*{nome}" id="nome" placeholder="Ex.: Supino reto" />
+                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+                </div>
 
-        <label for="treino">Treino:</label>
-        <select th:field="*{treino}" id="treino">
-            <option value="">Selecione um treino</option>
-            <option th:each="t : ${treinos}" th:value="${t.id}"
-                    th:text="${t.nome + ' (' + t.aluno.nome + ')'}"></option>
-        </select>
-        <span th:if="${#fields.hasErrors('treino')}" th:errors="*{treino}" class="error"></span>
-        <br><br>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="series">Séries</label>
+                        <input type="number" th:field="*{series}" id="series" placeholder="Ex.: 4" />
+                        <span th:if="${#fields.hasErrors('series')}" th:errors="*{series}" class="error"></span>
+                    </div>
+                    <div class="campo">
+                        <label for="repeticoes">Repetições</label>
+                        <input type="number" th:field="*{repeticoes}" id="repeticoes" placeholder="Ex.: 12" />
+                        <span th:if="${#fields.hasErrors('repeticoes')}" th:errors="*{repeticoes}" class="error"></span>
+                    </div>
+                    <div class="campo">
+                        <label for="carga">Carga (kg)</label>
+                        <input type="number" step="0.5" th:field="*{carga}" id="carga" placeholder="Ex.: 20" />
+                        <span th:if="${#fields.hasErrors('carga')}" th:errors="*{carga}" class="error"></span>
+                    </div>
+                </div>
 
-        <input type="submit" value="Salvar" />
-        <a href="/exercicios">Cancelar</a>
-    </form>
+                <div class="acoes">
+                    <input type="submit" value="Salvar" class="botao" />
+                    <a href="/exercicios" class="botao botao-secundario">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

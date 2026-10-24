@@ -1,26 +1,298 @@
+/* ===== Cores usadas em todo o sistema ===== */
+:root {
+    --cor-fundo: #f3f5f7;
+    --cor-cartao: #ffffff;
+    --cor-texto: #1f2933;
+    --cor-texto-suave: #616e7c;
+    --cor-borda: #dde3ea;
+    --cor-topo: #14213d;
+    --cor-destaque: #2e9e5b;
+    --cor-destaque-escura: #237a46;
+    --cor-perigo: #c0392b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
 }
-nav {
+
+/* ===== Barra do topo (logo + menu) ===== */
+.topo {
+    background: var(--cor-topo);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--cor-destaque);
+    font-weight: normal;
+    font-size: 16px;
+    margin-left: 6px;
+}
+
+.topo nav a {
+    color: #c9d3e0;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+.topo nav a:hover,
+.topo nav a.ativo {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+/* ===== Conteúdo da página ===== */
+main {
+    max-width: 1000px;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.subtitulo {
+    color: var(--cor-texto-suave);
+    margin: 6px 0 24px;
+}
+
+.cabecalho-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 20px;
 }
-table {
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-th, td {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-}
-label {
+
+/* ===== Botões ===== */
+.botao {
     display: inline-block;
-    width: 110px;
-    margin-top: 8px;
+    background: var(--cor-destaque);
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
 }
-a {
-    margin-right: 10px;
+
+.botao:hover {
+    background: var(--cor-destaque-escura);
 }
+
+.botao-secundario {
+    background: transparent;
+    color: var(--cor-texto-suave);
+    border: 1px solid var(--cor-borda);
+}
+
+.botao-secundario:hover {
+    background: var(--cor-borda);
+}
+
+.link-editar,
+.link-excluir {
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+.link-editar {
+    color: var(--cor-destaque-escura);
+}
+
+.link-excluir {
+    color: var(--cor-perigo);
+}
+
+/* ===== Tabelas de listagem ===== */
+.tabela-container {
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+th {
+    background: #f8fafc;
+    color: var(--cor-texto-suave);
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.vazio {
+    text-align: center;
+    color: var(--cor-texto-suave);
+    padding: 32px;
+}
+
+/* ===== Formulários ===== */
+.cartao {
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 28px;
+}
+
+.formulario {
+    max-width: 560px;
+}
+
+.campo {
+    margin-top: 18px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    font-size: 15px;
+    background: #ffffff;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: 2px solid var(--cor-destaque);
+    border-color: var(--cor-destaque);
+}
+
+.dica {
+    font-size: 13px;
+    color: var(--cor-texto-suave);
+    margin-top: 6px;
+}
+
+.dica a {
+    color: var(--cor-destaque-escura);
+}
+
+.linha {
+    display: flex;
+    gap: 16px;
+}
+
+.linha .campo {
+    flex: 1;
+}
+
+.acoes {
+    margin-top: 28px;
+    display: flex;
+    gap: 10px;
+}
+
 .error {
-    color: red;
+    display: block;
+    color: var(--cor-perigo);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* ===== Página inicial (painel da recepção) ===== */
+.painel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+}
+
+.painel .cartao {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.painel h2 {
+    margin: 0 0 8px;
+    font-size: 19px;
+}
+
+.painel p {
+    color: var(--cor-texto-suave);
+    flex: 1;
+    margin: 0 0 18px;
+}
+
+.painel .ver-todos {
+    margin-top: 10px;
+    color: var(--cor-texto-suave);
+    text-align: center;
+}
+
+.passos {
+    margin-top: 28px;
+}
+
+.passos h2 {
+    margin: 0 0 10px;
+    font-size: 17px;
+}
+
+.passos ol {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+/* ===== Celular ===== */
+@media (max-width: 600px) {
+    .topo {
+        padding: 14px 16px;
+    }
+    .linha {
+        flex-direction: column;
+        gap: 0;
+    }
+    .cartao {
+        padding: 20px;
+    }
 }

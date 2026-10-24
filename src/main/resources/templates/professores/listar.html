@@ -2,42 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Professores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Professores - LegalFit</title>
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <nav>
-        <a href="/">Início</a>
-        <a href="/alunos">Alunos</a>
-        <a href="/professores">Professores</a>
-        <a href="/treinos">Treinos</a>
-        <a href="/exercicios">Exercícios</a>
-    </nav>
-    <h1>Professores</h1>
-    <a href="/professores/novo">Adicionar Novo Professor</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>CREF</th>
-                <th>Especialidade</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="professor : ${professores}">
-                <td th:text="${professor.id}"></td>
-                <td th:text="${professor.nome}"></td>
-                <td th:text="${professor.cref}"></td>
-                <td th:text="${professor.especialidade}"></td>
-                <td>
-                    <a th:href="@{/professores/editar/{id}(id=${professor.id})}">Editar</a>
-                    <a th:href="@{/professores/excluir/{id}(id=${professor.id})}"
-                       onclick="return confirm('Tem certeza? Os treinos desse professor também serão excluídos.')">Excluir</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <header class="topo">
+        <a href="/" class="logo">LegalFit<span>Recepção</span></a>
+        <nav>
+            <a href="/alunos">Alunos</a>
+            <a href="/professores" class="ativo">Professores</a>
+            <a href="/treinos">Treinos</a>
+            <a href="/exercicios">Exercícios</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="cabecalho-pagina">
+            <div>
+                <h1>Professores</h1>
+                <p class="subtitulo">Equipe que monta os treinos</p>
+            </div>
+            <a href="/professores/novo" class="botao">+ Novo professor</a>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CREF</th>
+                        <th>Especialidade</th>
+                        <th>Treinos</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="professor : ${professores}">
+                        <td th:text="${professor.id}"></td>
+                        <td th:text="${professor.nome}"></td>
+                        <td th:text="${professor.cref}"></td>
+                        <td th:text="${professor.especialidade}"></td>
+                        <td th:text="${professor.treinos.size()}"></td>
+                        <td>
+                            <a th:href="@{/professores/editar/{id}(id=${professor.id})}" class="link-editar">Editar</a>
+                            <a th:href="@{/professores/excluir/{id}(id=${professor.id})}" class="link-excluir"
+                               onclick="return confirm('Tem certeza? Os treinos desse professor também serão excluídos.')">Excluir</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(professores)}">
+                        <td colspan="6" class="vazio">Nenhum professor cadastrado ainda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>

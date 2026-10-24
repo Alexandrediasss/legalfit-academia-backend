@@ -1,6 +1,5 @@
 package com.fametro.academia.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -26,8 +25,6 @@ public class Professor {
     // REMOVE: excluir o professor exclui os treinos dele.
     // Não usamos ALL + orphanRemoval (como no PDF) porque, ao editar pelo formulário,
     // a lista chega vazia e o Hibernate apagaria todos os treinos do professor.
-    // @JsonIgnore: a API não manda essa lista no JSON (senão: professor -> treinos -> professor -> ... infinito)
-    @JsonIgnore
     @OneToMany(mappedBy = "professor", cascade = CascadeType.REMOVE)
     private List<Treino> treinos = new ArrayList<>();
 

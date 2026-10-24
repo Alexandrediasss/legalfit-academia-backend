@@ -2,31 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${professor.id} == null ? 'Novo Professor' : 'Editar Professor'"></title>
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <h1 th:text="${professor.id} == null ? 'Novo Professor' : 'Editar Professor'"></h1>
-    <form th:action="@{/professores/salvar}" th:object="${professor}" method="post">
-        <input type="hidden" th:field="*{id}" />
+    <header class="topo">
+        <a href="/" class="logo">LegalFit<span>Recepção</span></a>
+        <nav>
+            <a href="/alunos">Alunos</a>
+            <a href="/professores" class="ativo">Professores</a>
+            <a href="/treinos">Treinos</a>
+            <a href="/exercicios">Exercícios</a>
+        </nav>
+    </header>
 
-        <label for="nome">Nome:</label>
-        <input type="text" th:field="*{nome}" id="nome" placeholder="Nome do professor" />
-        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
-        <br>
+    <main>
+        <div class="cartao formulario">
+            <h1 th:text="${professor.id} == null ? 'Novo Professor' : 'Editar Professor'"></h1>
+            <p class="subtitulo">Dados do professor</p>
 
-        <label for="cref">CREF:</label>
-        <input type="text" th:field="*{cref}" id="cref" placeholder="Ex.: 012345-G/AM" />
-        <span th:if="${#fields.hasErrors('cref')}" th:errors="*{cref}" class="error"></span>
-        <br>
+            <form th:action="@{/professores/salvar}" th:object="${professor}" method="post">
+                <input type="hidden" th:field="*{id}" />
 
-        <label for="especialidade">Especialidade:</label>
-        <input type="text" th:field="*{especialidade}" id="especialidade" placeholder="Ex.: Musculação" />
-        <span th:if="${#fields.hasErrors('especialidade')}" th:errors="*{especialidade}" class="error"></span>
-        <br><br>
+                <div class="campo">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" th:field="*{nome}" id="nome" placeholder="Ex.: Carla Souza" />
+                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+                </div>
 
-        <input type="submit" value="Salvar" />
-        <a href="/professores">Cancelar</a>
-    </form>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="cref">CREF</label>
+                        <input type="text" th:field="*{cref}" id="cref" placeholder="Ex.: 012345-G/AM" />
+                        <span th:if="${#fields.hasErrors('cref')}" th:errors="*{cref}" class="error"></span>
+                    </div>
+                    <div class="campo">
+                        <label for="especialidade">Especialidade</label>
+                        <input type="text" th:field="*{especialidade}" id="especialidade" placeholder="Ex.: Musculação" />
+                        <span th:if="${#fields.hasErrors('especialidade')}" th:errors="*{especialidade}" class="error"></span>
+                    </div>
+                </div>
+
+                <div class="acoes">
+                    <input type="submit" value="Salvar" class="botao" />
+                    <a href="/professores" class="botao botao-secundario">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

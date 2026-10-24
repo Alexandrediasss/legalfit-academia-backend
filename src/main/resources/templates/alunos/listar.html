@@ -2,42 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Alunos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alunos - LegalFit</title>
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <nav>
-        <a href="/">Início</a>
-        <a href="/alunos">Alunos</a>
-        <a href="/professores">Professores</a>
-        <a href="/treinos">Treinos</a>
-        <a href="/exercicios">Exercícios</a>
-    </nav>
-    <h1>Alunos</h1>
-    <a href="/alunos/novo">Adicionar Novo Aluno</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Idade</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="aluno : ${alunos}">
-                <td th:text="${aluno.id}"></td>
-                <td th:text="${aluno.nome}"></td>
-                <td th:text="${aluno.email}"></td>
-                <td th:text="${aluno.idade}"></td>
-                <td>
-                    <a th:href="@{/alunos/editar/{id}(id=${aluno.id})}">Editar</a>
-                    <a th:href="@{/alunos/excluir/{id}(id=${aluno.id})}"
-                       onclick="return confirm('Tem certeza? Os treinos desse aluno também serão excluídos.')">Excluir</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <header class="topo">
+        <a href="/" class="logo">LegalFit<span>Recepção</span></a>
+        <nav>
+            <a href="/alunos" class="ativo">Alunos</a>
+            <a href="/professores">Professores</a>
+            <a href="/treinos">Treinos</a>
+            <a href="/exercicios">Exercícios</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="cabecalho-pagina">
+            <div>
+                <h1>Alunos</h1>
+                <p class="subtitulo">Pessoas matriculadas na academia</p>
+            </div>
+            <a href="/alunos/novo" class="botao">+ Novo aluno</a>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Idade</th>
+                        <th>Treinos</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="aluno : ${alunos}">
+                        <td th:text="${aluno.id}"></td>
+                        <td th:text="${aluno.nome}"></td>
+                        <td th:text="${aluno.email}"></td>
+                        <td th:text="${aluno.idade}"></td>
+                        <td th:text="${aluno.treinos.size()}"></td>
+                        <td>
+                            <a th:href="@{/alunos/editar/{id}(id=${aluno.id})}" class="link-editar">Editar</a>
+                            <a th:href="@{/alunos/excluir/{id}(id=${aluno.id})}" class="link-excluir"
+                               onclick="return confirm('Tem certeza? Os treinos desse aluno também serão excluídos.')">Excluir</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(alunos)}">
+                        <td colspan="6" class="vazio">Nenhum aluno cadastrado ainda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>

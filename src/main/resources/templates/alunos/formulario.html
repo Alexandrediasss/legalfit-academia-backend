@@ -2,31 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${aluno.id} == null ? 'Novo Aluno' : 'Editar Aluno'"></title>
     <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <h1 th:text="${aluno.id} == null ? 'Novo Aluno' : 'Editar Aluno'"></h1>
-    <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post">
-        <input type="hidden" th:field="*{id}" />
+    <header class="topo">
+        <a href="/" class="logo">LegalFit<span>Recepção</span></a>
+        <nav>
+            <a href="/alunos" class="ativo">Alunos</a>
+            <a href="/professores">Professores</a>
+            <a href="/treinos">Treinos</a>
+            <a href="/exercicios">Exercícios</a>
+        </nav>
+    </header>
 
-        <label for="nome">Nome:</label>
-        <input type="text" th:field="*{nome}" id="nome" placeholder="Nome do aluno" />
-        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
-        <br>
+    <main>
+        <div class="cartao formulario">
+            <h1 th:text="${aluno.id} == null ? 'Novo Aluno' : 'Editar Aluno'"></h1>
+            <p class="subtitulo">Dados da matrícula</p>
 
-        <label for="email">E-mail:</label>
-        <input type="text" th:field="*{email}" id="email" placeholder="aluno@email.com" />
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></span>
-        <br>
+            <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post">
+                <input type="hidden" th:field="*{id}" />
 
-        <label for="idade">Idade:</label>
-        <input type="number" th:field="*{idade}" id="idade" placeholder="Idade" />
-        <span th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}" class="error"></span>
-        <br><br>
+                <div class="campo">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" th:field="*{nome}" id="nome" placeholder="Ex.: João da Silva" />
+                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+                </div>
 
-        <input type="submit" value="Salvar" />
-        <a href="/alunos">Cancelar</a>
-    </form>
+                <div class="linha">
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input type="text" th:field="*{email}" id="email" placeholder="aluno@email.com" />
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></span>
+                    </div>
+                    <div class="campo">
+                        <label for="idade">Idade</label>
+                        <input type="number" th:field="*{idade}" id="idade" placeholder="Ex.: 25" />
+                        <span th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}" class="error"></span>
+                    </div>
+                </div>
+
+                <div class="acoes">
+                    <input type="submit" value="Salvar" class="botao" />
+                    <a href="/alunos" class="botao botao-secundario">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

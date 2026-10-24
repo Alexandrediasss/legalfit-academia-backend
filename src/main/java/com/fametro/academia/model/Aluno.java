@@ -1,6 +1,5 @@
 package com.fametro.academia.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -29,7 +28,6 @@ public class Aluno {
     private Integer idade;
 
     // REMOVE: excluir o aluno exclui os treinos dele (veja o comentário em Professor)
-    @JsonIgnore
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.REMOVE)
     private List<Treino> treinos = new ArrayList<>();
 
