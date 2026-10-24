@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Exercícios</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/alunos">Alunos</a>
+        <a href="/professores">Professores</a>
+        <a href="/treinos">Treinos</a>
+        <a href="/exercicios">Exercícios</a>
+    </nav>
+    <h1>Exercícios</h1>
+    <a href="/exercicios/novo">Adicionar Novo Exercício</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Séries</th>
+                <th>Repetições</th>
+                <th>Carga (kg)</th>
+                <th>Treino</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="exercicio : ${exercicios}">
+                <td th:text="${exercicio.id}"></td>
+                <td th:text="${exercicio.nome}"></td>
+                <td th:text="${exercicio.series}"></td>
+                <td th:text="${exercicio.repeticoes}"></td>
+                <td th:text="${exercicio.carga}"></td>
+                <td th:text="${exercicio.treino.nome + ' (' + exercicio.treino.aluno.nome + ')'}"></td>
+                <td>
+                    <a th:href="@{/exercicios/editar/{id}(id=${exercicio.id})}">Editar</a>
+                    <a th:href="@{/exercicios/excluir/{id}(id=${exercicio.id})}"
+                       onclick="return confirm('Tem certeza?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

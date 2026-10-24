@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${professor.id} == null ? 'Novo Professor' : 'Editar Professor'"></title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1 th:text="${professor.id} == null ? 'Novo Professor' : 'Editar Professor'"></h1>
+    <form th:action="@{/professores/salvar}" th:object="${professor}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="nome">Nome:</label>
+        <input type="text" th:field="*{nome}" id="nome" placeholder="Nome do professor" />
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+        <br>
+
+        <label for="cref">CREF:</label>
+        <input type="text" th:field="*{cref}" id="cref" placeholder="Ex.: 012345-G/AM" />
+        <span th:if="${#fields.hasErrors('cref')}" th:errors="*{cref}" class="error"></span>
+        <br>
+
+        <label for="especialidade">Especialidade:</label>
+        <input type="text" th:field="*{especialidade}" id="especialidade" placeholder="Ex.: Musculação" />
+        <span th:if="${#fields.hasErrors('especialidade')}" th:errors="*{especialidade}" class="error"></span>
+        <br><br>
+
+        <input type="submit" value="Salvar" />
+        <a href="/professores">Cancelar</a>
+    </form>
+</body>
+</html>

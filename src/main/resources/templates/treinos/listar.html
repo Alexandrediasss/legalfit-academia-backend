@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Treinos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/alunos">Alunos</a>
+        <a href="/professores">Professores</a>
+        <a href="/treinos">Treinos</a>
+        <a href="/exercicios">Exercícios</a>
+    </nav>
+    <h1>Treinos</h1>
+    <a href="/treinos/novo">Adicionar Novo Treino</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Objetivo</th>
+                <th>Aluno</th>
+                <th>Professor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="treino : ${treinos}">
+                <td th:text="${treino.id}"></td>
+                <td th:text="${treino.nome}"></td>
+                <td th:text="${treino.objetivo}"></td>
+                <td th:text="${treino.aluno.nome}"></td>
+                <td th:text="${treino.professor.nome}"></td>
+                <td>
+                    <a th:href="@{/treinos/editar/{id}(id=${treino.id})}">Editar</a>
+                    <a th:href="@{/treinos/excluir/{id}(id=${treino.id})}"
+                       onclick="return confirm('Tem certeza? Os exercícios desse treino também serão excluídos.')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

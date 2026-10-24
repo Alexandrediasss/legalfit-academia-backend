@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${treino.id} == null ? 'Novo Treino' : 'Editar Treino'"></title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1 th:text="${treino.id} == null ? 'Novo Treino' : 'Editar Treino'"></h1>
+    <form th:action="@{/treinos/salvar}" th:object="${treino}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="nome">Nome:</label>
+        <input type="text" th:field="*{nome}" id="nome" placeholder="Ex.: Treino A - Peito e Tríceps" />
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+        <br>
+
+        <label for="objetivo">Objetivo:</label>
+        <input type="text" th:field="*{objetivo}" id="objetivo" placeholder="Ex.: Hipertrofia" />
+        <span th:if="${#fields.hasErrors('objetivo')}" th:errors="*{objetivo}" class="error"></span>
+        <br>
+
+        <label for="aluno">Aluno:</label>
+        <select th:field="*{aluno}" id="aluno">
+            <option value="">Selecione um aluno</option>
+            <option th:each="a : ${alunos}" th:value="${a.id}" th:text="${a.nome}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('aluno')}" th:errors="*{aluno}" class="error"></span>
+        <br>
+
+        <label for="professor">Professor:</label>
+        <select th:field="*{professor}" id="professor">
+            <option value="">Selecione um professor</option>
+            <option th:each="p : ${professores}" th:value="${p.id}" th:text="${p.nome}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('professor')}" th:errors="*{professor}" class="error"></span>
+        <br><br>
+
+        <input type="submit" value="Salvar" />
+        <a href="/treinos">Cancelar</a>
+    </form>
+</body>
+</html>

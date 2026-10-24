@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${aluno.id} == null ? 'Novo Aluno' : 'Editar Aluno'"></title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <h1 th:text="${aluno.id} == null ? 'Novo Aluno' : 'Editar Aluno'"></h1>
+    <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="nome">Nome:</label>
+        <input type="text" th:field="*{nome}" id="nome" placeholder="Nome do aluno" />
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+        <br>
+
+        <label for="email">E-mail:</label>
+        <input type="text" th:field="*{email}" id="email" placeholder="aluno@email.com" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></span>
+        <br>
+
+        <label for="idade">Idade:</label>
+        <input type="number" th:field="*{idade}" id="idade" placeholder="Idade" />
+        <span th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}" class="error"></span>
+        <br><br>
+
+        <input type="submit" value="Salvar" />
+        <a href="/alunos">Cancelar</a>
+    </form>
+</body>
+</html>

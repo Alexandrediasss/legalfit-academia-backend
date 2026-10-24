@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Alunos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/alunos">Alunos</a>
+        <a href="/professores">Professores</a>
+        <a href="/treinos">Treinos</a>
+        <a href="/exercicios">Exercícios</a>
+    </nav>
+    <h1>Alunos</h1>
+    <a href="/alunos/novo">Adicionar Novo Aluno</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Idade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.id}"></td>
+                <td th:text="${aluno.nome}"></td>
+                <td th:text="${aluno.email}"></td>
+                <td th:text="${aluno.idade}"></td>
+                <td>
+                    <a th:href="@{/alunos/editar/{id}(id=${aluno.id})}">Editar</a>
+                    <a th:href="@{/alunos/excluir/{id}(id=${aluno.id})}"
+                       onclick="return confirm('Tem certeza? Os treinos desse aluno também serão excluídos.')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
