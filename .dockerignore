@@ -1,0 +1,9 @@
+# Arquivos que o Docker NÃO precisa copiar para dentro da imagem
+target/
+.git/
+.idea/
+.vscode/
+.settings/
+.classpath
+.project
+*.md
